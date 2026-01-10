@@ -1,0 +1,330 @@
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+.chatbot-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 220px;
+  height: 60px;
+  background: #06b6d4; /* Cyan color */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Changed from 50px to 12px for simple corners */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4); /* Cyan shadow */
+  transition: all 0.3s ease;
+  padding: 0 16px;
+  white-space: nowrap;
+  outline: none;
+  text-decoration: none;
+  transform: none !important; /* Prevent text flipping on hover */
+}
+
+.chatbot-toggle:hover {
+  background: #0892ac; /* Darker cyan for hover */
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+  transform: translateY(-2px) !important; /* Maintain button shape on hover */
+}
+
+.chatbot-toggle:active {
+  background: #05809d; /* Even darker cyan for active */
+  box-shadow: 0 2px 10px rgba(6, 182, 212, 0.4);
+  transform: translateY(0) !important;
+}
+
+.chatbot-toggle span {
+  transform: none !important; /* Ensure text doesn't flip */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Rest of your CSS remains the same */
+.chatbot-window {
+  width: 380px;
+  height: 500px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.chatbot-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.chatbot-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: background 0.2s;
+}
+
+.chatbot-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: #f8f9fa;
+}
+
+.chatbot-welcome {
+  text-align: center;
+  padding: 20px;
+  color: #6c757d;
+}
+
+.welcome-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.chatbot-welcome h3 {
+  color: #343a40;
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.chatbot-welcome p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.chatbot-welcome ul {
+  text-align: left;
+  margin: 12px 0;
+  padding-left: 20px;
+}
+
+.chatbot-welcome li {
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.welcome-hint {
+  font-size: 12px;
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.message {
+  margin-bottom: 16px;
+  max-width: 85%;
+}
+
+.message.user {
+  margin-left: auto;
+}
+
+.message.assistant {
+  margin-right: auto;
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.message.user .message-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message.assistant .message-content {
+  background: white;
+  color: #343a40;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.message-sources {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+}
+
+.message.assistant .message-sources {
+  border-top-color: #e9ecef;
+}
+
+.source-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.source-title {
+  color: #06b6d4; /* Cyan color */
+}
+
+.source-score {
+  color: #adb5bd;
+  font-size: 11px;
+}
+
+.message-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #adb5bd;
+}
+
+.message.assistant.loading .message-content {
+  background: white;
+  box-shadow: none;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: #06b6d4; /* Cyan color */
+  border-radius: 50%;
+  animation: bounce 1.4s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.chatbot-input {
+  display: flex;
+  align-items: flex-end;
+  padding: 12px 16px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+  gap: 10px;
+}
+
+.chatbot-input textarea {
+  flex: 1;
+  border: 1px solid #e9ecef;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  max-height: 100px;
+  font-family: inherit;
+}
+
+.chatbot-input textarea:focus {
+  border-color: #667eea;
+}
+
+.chatbot-input textarea:disabled {
+  background: #f8f9fa;
+}
+
+.chatbot-input button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.chatbot-input button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.chatbot-input button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .chatbot-window {
+    width: calc(100vw - 40px);
+    height: calc(100vh - 120px);
+  }
+
+  .chatbot-toggle {
+    width: auto;
+    min-width: 65px;
+    height: 65px;
+    padding: 0 15px;
+    border-radius: 12px !important; /* Changed from 50px to 12px for mobile */
+  }
+}

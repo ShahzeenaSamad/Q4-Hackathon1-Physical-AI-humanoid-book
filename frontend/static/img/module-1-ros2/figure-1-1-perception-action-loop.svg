@@ -1,0 +1,28 @@
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f8f9fa"/>
+  <text x="50%" y="45%" font-family="Arial" font-size="24" text-anchor="middle" fill="#333">Perception-Action Loop</text>
+  <text x="50%" y="55%" font-family="Arial" font-size="16" text-anchor="middle" fill="#666">(Place Holder for Figure 1.1)</text>
+
+  <!-- Perception -->
+  <circle cx="200" cy="200" r="60" fill="none" stroke="#4a90e2" stroke-width="4"/>
+  <text x="200" y="205" font-family="Arial" font-size="14" text-anchor="middle" fill="#4a90e2">Perception</text>
+
+  <!-- Decision -->
+  <circle cx="400" cy="200" r="60" fill="none" stroke="#50e3c2" stroke-width="4"/>
+  <text x="400" y="205" font-family="Arial" font-size="14" text-anchor="middle" fill="#50e3c2">Cognition</text>
+
+  <!-- Action -->
+  <circle cx="600" cy="200" r="60" fill="none" stroke="#f5a623" stroke-width="4"/>
+  <text x="600" y="205" font-family="Arial" font-size="14" text-anchor="middle" fill="#f5a623">Action</text>
+
+  <!-- Arrows -->
+  <line x1="265" y1="200" x2="335" y2="200" stroke="#ccc" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="465" y1="200" x2="535" y2="200" stroke="#ccc" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 600 265 Q 400 350 200 265" fill="none" stroke="#ccc" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ccc" />
+    </marker>
+  </defs>
+</svg>

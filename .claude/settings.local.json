@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(sp.plan)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \".specify/scripts/powershell/setup-plan.ps1\" -Json)",
+      "Skill(sp.implement)",
+      "Bash(powershell -ExecutionPolicy Bypass -File:*)",
+      "Bash(dir /B \"C:\\\\Users\\\\SheZziiii SaM\\\\Hackathon 1\\\\specs\\\\001-textbook-content-structure\\\\checklists\")",
+      "Bash(git rev-parse:*)",
+      "Bash(dir /B \".gitignore\" \".dockerignore\" \".eslintignore\" \".prettierignore\")",
+      "Bash(dir /B /S \"C:\\\\Users\\\\SheZziiii SaM\\\\Hackathon 1\")",
+      "Bash(dir /B \"C:\\\\Users\\\\SheZziiii SaM\\\\Hackathon 1\\\\backend\\\\migrations\")",
+      "Bash(venvScriptspython -m alembic init migrations)",
+      "Bash(./venv/Scripts/python:*)"
+    ]
+  }
+}
