@@ -57,7 +57,7 @@ const config: Config = {
 
     // Chatbot configuration
     chatWidget: {
-      backendUrl: 'https://shahzeenasamad-physical-ai-backend.hf.space', // Updated to actual deployed backend
+      backendUrl: 'https://shahzeenasamad-physical-ai-notebook.hf.space', // Updated to actual deployed backend
       position: 'right',
     },
     colorMode: {
