@@ -3,17 +3,9 @@ FastAPI Backend for Physical AI & Humanoid Robotics Textbook
 Main application entry point with RAG chatbot and auth endpoints
 """
 
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from loguru import logger
-import sys
-
-# --- Logger Configuration ---
-logger.remove()
-logger.add(sys.stderr, level="INFO")
-logger.add("logs/backend.log", level="INFO", rotation="10 MB", retention="7 days")
-# ---
+from src.core.config import settings
 
 app = FastAPI(
     title="Physical AI Textbook API",
@@ -21,37 +13,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# --- Middleware ---
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    """Logs incoming HTTP requests."""
-    logger.info(f"Request: {request.method} {request.url.path}")
-    response = await call_next(request)
-    logger.info(f"Response: {response.status_code}")
-    return response
-
-# --- Exception Handler ---
-@app.exception_handler(Exception)
-async def generic_exception_handler(request: Request, exc: Exception):
-    """Catches and logs unhandled exceptions, returning a generic 500 error."""
-    logger.error(f"Unhandled exception for request {request.method} {request.url.path}: {exc}", exc_info=True)
-    return JSONResponse(
-        status_code=500,
-        content={"detail": "An internal server error occurred."},
-    )
-# ---
-
-# CORS configuration for frontend - UPDATED FOR HUGGING FACE AND VERCEL
+# CORS configuration for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "https://shahzeenasamad-physical-ai-frontend.vercel.app",  # Deployed frontend
-        "https://*.vercel.app",  # Allow any Vercel subdomain
-        "https://*.hf.space",    # Allow Hugging Face Spaces
-        "*",  # Allow all origins for maximum compatibility
-    ],
+    allow_origins=["http://localhost:3000", "http://localhost:3001"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -75,17 +40,26 @@ async def root():
         "health": "/health"
     }
 
+@app.get("/test-rag")
+async def test_rag():
+    """Test RAG service directly"""
+    try:
+        from src.services.rag_service import RAGService
+        rag = RAGService()
+        result = rag.answer_question("What is ROS 2?", top_k=2)
+        return {"status": "success", "answer": result["answer"][:200]}
+    except Exception as e:
+        import traceback
+        return {"status": "error", "message": str(e), "trace": traceback.format_exc()}
+
 # Import routers
-from src.api import chat_mock
+from src.api import chat_mock, auth
 
 # Register routers - Using MOCK version for demo
 app.include_router(chat_mock.router, prefix="/api/chat", tags=["chat"])
+app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
 
-# Other routes
-@app.get("/api/chapters")
-async def get_chapters():
-    return [{"id": "ch1", "title": "Introduction to Physical AI", "module": "Module 1"}]
-
-@app.get("/api/modules")
-async def get_modules():
-    return [{"id": "mod1", "title": "Module 1: ROS 2 Fundamentals"}]
+# Other bonus routers placeholders
+# from src.api import personalization, translation
+# app.include_router(personalization.router, prefix="/api/personalize", tags=["personalization"])
+# app.include_router(translation.router, prefix="/api/translate", tags=["translation"])

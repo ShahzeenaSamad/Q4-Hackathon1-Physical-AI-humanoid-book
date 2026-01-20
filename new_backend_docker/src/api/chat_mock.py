@@ -4,14 +4,14 @@ Mock Chat API - Demo version with hardcoded responses
 
 from fastapi import APIRouter
 from pydantic import BaseModel
-from typing import List, Dict, Optional
+from typing import List, Dict
 import uuid
 
 router = APIRouter()
 
 class ChatRequest(BaseModel):
     question: str
-    session_id: Optional[str] = None
+    session_id: str | None = None
     top_k: int = 3
 
 class ChatResponse(BaseModel):
@@ -20,8 +20,6 @@ class ChatResponse(BaseModel):
     sources: List[Dict]
     context_used: bool
     model_used: str
-
-    model_config = {"protected_namespaces": ()}
 
 # Mock knowledge base
 MOCK_RESPONSES = {
@@ -79,7 +77,7 @@ def get_mock_response(question: str) -> Dict:
         "sources": []
     }
 
-@router.post("/api/chat/query", response_model=ChatResponse)
+@router.post("/query", response_model=ChatResponse)
 async def chat_query_mock(request: ChatRequest):
     """Mock chatbot with predefined responses for demo"""
 
