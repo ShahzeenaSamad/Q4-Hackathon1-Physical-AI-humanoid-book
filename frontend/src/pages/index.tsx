@@ -60,7 +60,7 @@ function TextbookHomepage() {
                   {/* Button 2: View Contents */}
                   <Link
                     className="button button--lg"
-                    to="/docs/module-1-ros2/table-of-contents"
+                    to="/docs/content-index"
                     style={{
                       background: 'transparent',
                       color: '#26d0ce',
