@@ -13,6 +13,12 @@ sqlalchemy==2.0.25
 qdrant-client
 openai==1.12.0
 
+# RAG Dependencies (FREE, no API keys needed)
+sentence-transformers==2.3.1
+torch==2.1.0
+numpy==1.24.3
+requests==2.31.0
+
 # LangChain for RAG
 langchain==0.1.4
 
