@@ -48,7 +48,7 @@ const ChatbotWidget: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://shahzeenasamad-physical-ai-backend.hf.space/api/chat/query', {
+      const response = await fetch('https://shahzeenasamad-physical-ai-notebook.hf.space/api/chat/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
