@@ -19,6 +19,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Module 1: ROS 2 Fundamentals',
       items: [
+        'module-1-ros2/table-of-contents',
         'module-1-ros2/introduction-physical-ai',
         'module-1-ros2/ros2-architecture',
         'module-1-ros2/nodes-topics',
